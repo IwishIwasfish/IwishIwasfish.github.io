@@ -102,25 +102,17 @@ Gaze
 function generateBingoBoard() {
     const bingoBoard = document.getElementById('bingo-board');
     bingoBoard.innerHTML = '';
-    const selectedItems = getRandomItems(items, 24); // 24 items + 1 free space
+    const selectedItems = getRandomItems(items, 25);
     let index = 0;
 
     for (let i = 0; i < 5; i++) {
         for (let j = 0; j < 5; j++) {
             const cell = document.createElement('div');
             cell.className = 'bingo-cell';
-            if (i === 2 && j === 2) {
-                cell.textContent = 'Free Space';
-                cell.classList.add('selected');
-                cell.classList.add('free-space');
-            } else {
-                cell.textContent = selectedItems[index++];
-            }
+            cell.textContent = selectedItems[index++];
             cell.addEventListener('click', () => {
-                if (!cell.classList.contains('free-space')) {
-                    cell.classList.toggle('selected');
-                    checkBingo();
-                }
+                cell.classList.toggle('selected');
+                checkBingo();
             });
             bingoBoard.appendChild(cell);
         }
